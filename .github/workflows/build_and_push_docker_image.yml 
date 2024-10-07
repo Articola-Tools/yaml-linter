@@ -1,0 +1,43 @@
+name: "Build and push YAML linter Docker image"
+
+on:
+    push:
+        branches:
+            - "main"
+        paths:
+            - ".dockerignore"
+            - ".yamllint"
+            - "Dockerfile"
+
+permissions:
+  packages: write
+  contents: read
+
+jobs:
+    build-and-push:
+        runs-on: "ubuntu-latest"
+        # NOTE: building and pushing Docker image of YAML linter take around 1 minute.
+        # If this job takes more than 5 minutes, it means that something is wrong.
+        timeout-minutes: 5
+        steps:
+            - name: "Checkout ${{ github.event.repository.name }}"
+              uses: "actions/checkout@v4"
+
+            - name: "Add short hash of current commit to environment variables"
+              run: "echo \"CURRENT_COMMIT_SHORT_HASH=$(git rev-parse --short \"$GITHUB_SHA\")\" >> \"$GITHUB_ENV\""
+
+            - name: "Set up Docker Buildx"
+              uses: "docker/setup-buildx-action@v3"
+
+            - name: "Build and push YAML linter Docker image"
+              uses: "docker/build-push-action@v6"
+              with:
+                  push: true
+                  tags: "ghcr.io/${{ github.repository_owner }}/yaml-linter:latest, ghcr.io/${{ github.repository_owner }}/yaml-linter:${{ env.CURRENT_COMMIT_SHORT_HASH }}"
+
+                  # NOTE: there are few other options for the cache,
+                  # see https://docs.docker.com/build/ci/github-actions/cache/#registry-cache
+
+                  # ATTENTION: this string must be in CSV format, so don't add space after the comma.
+                  cache-from: "type=registry,ref=ghcr.io/${{ github.repository_owner }}/yaml-linter:latest"
+                  cache-to: "type=inline"
