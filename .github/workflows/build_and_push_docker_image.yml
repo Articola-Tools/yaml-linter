@@ -49,10 +49,5 @@ jobs:
                   push: true
                   tags: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,
                          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.CURRENT_COMMIT_SHORT_HASH }}"
-
-                  # NOTE: there are few other options for the cache,
-                  # see https://docs.docker.com/build/ci/github-actions/cache/#registry-cache
-
-                  # ATTENTION: this string must be in CSV format, so don't add space after the comma.
-                  cache-from: "type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
-                  cache-to: "type=inline"
+                  cache-from: "type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache"
+                  cache-to: "type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max"
