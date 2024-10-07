@@ -30,11 +30,6 @@ jobs:
                   username: "${{ github.actor }}"
                   password: "${{ secrets.GITHUB_TOKEN }}"
 
-            - name: "Extract Docker metadata"
-              uses: "docker/metadata-action@v5"
-              with:
-                  images: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
-
             - name: "Build YAML linter Docker image"
               uses: "docker/build-push-action@v6"
               with:
@@ -42,8 +37,8 @@ jobs:
                   load: true
                   # NOTE: using another name to don't allow docker to download image from the internet in the next step.
                   tags: "local/yaml-linter-pr:latest"
-                  cache-from: "type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache"
-                  cache-to: "type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max"
+                  cache-from: "type=gha"
+                  cache-to: "type=gha,mode=max"
 
             - name: "Run local YAML linter"
               run: "docker run --rm -v ${{ github.workspace }}:/linter_workdir/repo local/yaml-linter-pr:latest"
