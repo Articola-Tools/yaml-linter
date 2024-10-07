@@ -28,7 +28,7 @@ jobs:
                   # see https://docs.docker.com/build/ci/github-actions/cache/#registry-cache
 
                   # ATTENTION: this string must be in CSV format, so don't add space after the comma.
-                  cache-from: "type=registry,ref=ghcr.io/${{ github.repository_owner }}/yaml-linter:latest"
+                  cache-from: "type=registry,ref=ghcr.io/articola-tools/yaml-linter:latest"
                   cache-to: "type=inline"
             - name: "Run local YAML linter"
               run: "docker run --rm -v ${{ github.workspace }}:/linter_workdir/repo local/yaml-linter-pr:latest"

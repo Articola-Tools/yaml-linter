@@ -33,12 +33,12 @@ jobs:
               uses: "docker/build-push-action@v6"
               with:
                   push: true
-                  tags: "ghcr.io/${{ github.repository_owner }}/yaml-linter:latest,
-                         ghcr.io/${{ github.repository_owner }}/yaml-linter:${{ env.CURRENT_COMMIT_SHORT_HASH }}"
+                  tags: "ghcr.io/articola-tools/yaml-linter:latest,
+                         ghcr.io/articola-tools/yaml-linter:${{ env.CURRENT_COMMIT_SHORT_HASH }}"
 
                   # NOTE: there are few other options for the cache,
                   # see https://docs.docker.com/build/ci/github-actions/cache/#registry-cache
 
                   # ATTENTION: this string must be in CSV format, so don't add space after the comma.
-                  cache-from: "type=registry,ref=ghcr.io/${{ github.repository_owner }}/yaml-linter:latest"
+                  cache-from: "type=registry,ref=ghcr.io/articola-tools/yaml-linter:latest"
                   cache-to: "type=inline"
