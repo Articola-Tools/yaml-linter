@@ -10,8 +10,8 @@ on:
             - "Dockerfile"
 
 permissions:
-  packages: write
-  contents: read
+    packages: write
+    contents: read
 
 jobs:
     build-and-push:
