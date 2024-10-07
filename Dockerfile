@@ -1,9 +1,5 @@
 FROM python:3.12.7-alpine
 
-LABEL org.opencontainers.image.description="This image contains preconfigured \
-[YAML linter](https://github.com/adrienverge/yamllint). \
-This linter is used in Articola Tools organization's repositories to lint YAML files like GitHub Actions."
-
 RUN pip install --no-cache-dir yamllint
 
 ADD ./ /linter_workdir
