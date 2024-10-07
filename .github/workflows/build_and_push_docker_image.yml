@@ -46,7 +46,7 @@ jobs:
               uses: "docker/build-push-action@v6"
               id: "build-and-push"
               with:
-                  context: .
+                  context: "."
                   push: true
                   tags: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,
                          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.CURRENT_COMMIT_SHORT_HASH }}"
