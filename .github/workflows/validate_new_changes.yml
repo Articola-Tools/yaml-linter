@@ -5,7 +5,7 @@ on:
 
 permissions:
     contents: "read"
-    id-token: "read"
+    packages: "read"
 
 env:
     REGISTRY: "ghcr.io"
