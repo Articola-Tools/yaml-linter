@@ -43,3 +43,14 @@ jobs:
 
             - name: "Run local YAML linter"
               run: "docker run --rm -v ${{ github.workspace }}:/linter_workdir/repo local/yaml-linter-pr:latest"
+
+            - name: "Run Trivy vulnerability scanner"
+              uses: "aquasecurity/trivy-action@0.26.0"
+              with:
+                  image-ref: "local/yaml-linter-pr:latest"
+                  format: "table"
+                  exit-code: "1"
+                  ignore-unfixed: true
+                  vuln-type: "os,library"
+                  severity: "CRITICAL,HIGH"
+                  scanners: "vuln,secret,config"
