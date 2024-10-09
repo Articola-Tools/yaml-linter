@@ -1,6 +1,6 @@
 # Articola Tools' YAML linter
 
-[![size-badge]](https://ghcr-badge.egpl.dev/articola-tools/yaml-linter/size)
+[![image size](https://ghcr-badge.egpl.dev/articola-tools/yaml-linter/size)](https://ghcr-badge.egpl.dev/articola-tools/yaml-linter/size)
 
 This repo contains Dockerfile with preconfigured [YAML linter](https://github.com/adrienverge/yamllint).
 This linter is used in Articola Tools organization's repositories to lint YAML files like
