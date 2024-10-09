@@ -46,6 +46,9 @@ jobs:
 
             - name: "Run Trivy vulnerability scanner"
               uses: "aquasecurity/trivy-action@0.26.0"
+              env:
+                  # NOTE: this is needed because sometimes GHCR hits the rate limit, and AWS will be used instead.
+                  TRIVY_DB_REPOSITORY: "ghcr.io/aquasecurity/trivy-db,public.ecr.aws/aquasecurity/trivy-db"
               with:
                   image-ref: "local/yaml-linter-pr:latest"
                   format: "table"
