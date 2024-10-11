@@ -56,4 +56,4 @@ jobs:
                   ignore-unfixed: true
                   vuln-type: "os,library"
                   severity: "CRITICAL,HIGH,MEDIUM,LOW"
-                  scanners: "vuln,secret,misconfig"
+                  scanners: "vuln,secret,misconfig,license"
