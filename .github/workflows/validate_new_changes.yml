@@ -15,9 +15,9 @@ jobs:
     find-changed-files:
         runs-on: "ubuntu-latest"
         outputs:
-            is_yaml_changed: "${{ steps.variables-setup.outputs.is_yaml_changed }}"
-            is_dockerfile_changed: "${{ steps.variables-setup.outputs.is_dockerfile_changed }}"
-            is_markdown_changed: "${{ steps.variables-setup.outputs.is_markdown_changed }}"
+            is_yaml_changed: "${{ steps.filter.outputs.yaml }}"
+            is_dockerfile_changed: "${{ steps.filter.outputs.dockerfile }}"
+            is_markdown_changed: "${{ steps.filter.outputs.markdown }}"
         permissions:
             pull-requests: "read"
         steps:
@@ -38,13 +38,6 @@ jobs:
                       - "**/Dockerfile"
                       markdown:
                       - "**/*.md"
-                  token: "${{ secrets.GITHUB_TOKEN }}"
-            - name: "Setup job variables"
-              id: "variables-setup"
-              run: |
-                  echo "is_yaml_changed=${{ steps.filter.outputs.yaml }}" >> $GITHUB_OUTPUT
-                  echo "is_dockerfile_changed=${{ steps.filter.outputs.dockerfile }})" >> $GITHUB_OUTPUT
-                  echo "is_markdown_changed=${{ steps.filter.outputs.markdown }})" >> $GITHUB_OUTPUT
 
     validate-yaml-linter-image:
         runs-on: "ubuntu-latest"
