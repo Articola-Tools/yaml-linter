@@ -2,7 +2,7 @@ FROM python:3.13.0-alpine
 
 RUN addgroup -S lintergroup && adduser -S linteruser -G lintergroup
 
-RUN pip install --no-cache-dir yamllint
+RUN pip install --no-cache-dir yamllint==1.35.1
 
 COPY ./ /linter_workdir
 RUN chown -R linteruser:lintergroup /linter_workdir
