@@ -113,4 +113,5 @@ jobs:
                   password: "${{ secrets.GITHUB_TOKEN }}"
 
             - name: "Run Dockerfile linter"
-              run: "docker run --rm -v ${{ github.workspace }}:/linter_workdir/repo ${{ env.REGISTRY }}/articola-tools/dockerfile-linter:latest"
+              run: "docker run --rm -v ${{ github.workspace }}:/linter_workdir/repo
+                    ${{ env.REGISTRY }}/articola-tools/dockerfile-linter:latest"
