@@ -21,6 +21,7 @@ env:
 jobs:
     build-and-push:
         runs-on: "ubuntu-latest"
+
         # NOTE: building and pushing Docker image of YAML linter take around 1 minute.
         # If this job takes more than 5 minutes, it means that something is wrong.
         timeout-minutes: 5
