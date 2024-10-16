@@ -69,6 +69,7 @@ jobs:
             - name: "Build YAML linter Docker image"
               uses: "docker/build-push-action@v6"
               with:
+                  # NOTE: setup of `context` is needed to force builder to use the `.dockerignore` file.
                   context: "."
                   push: false
                   load: true
