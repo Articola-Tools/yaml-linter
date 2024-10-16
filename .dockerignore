@@ -2,6 +2,7 @@
 .github
 .git
 .dockerignore
+tests
 Dockerfile
 LICENSE
 README.md
