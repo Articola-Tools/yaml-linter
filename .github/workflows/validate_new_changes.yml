@@ -69,6 +69,7 @@ jobs:
             - name: "Build YAML linter Docker image"
               uses: "docker/build-push-action@v6"
               with:
+                  context: "."
                   push: false
                   load: true
 
