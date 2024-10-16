@@ -5,6 +5,7 @@ RUN addgroup -S lintergroup && adduser -S linteruser -G lintergroup
 RUN pip install --no-cache-dir yamllint==1.35.1
 
 COPY ./ /linter_workdir
+
 RUN chown -R linteruser:lintergroup /linter_workdir
 
 # NOTE: we need to have a separate directory for linter to work only with needed files,

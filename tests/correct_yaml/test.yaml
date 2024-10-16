@@ -77,15 +77,6 @@ jobs:
                   cache-from: "type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
                   cache-to: "type=inline"
 
-            - name: "Test correctly formatted YAML"
-              run: "docker run --rm -v ${{ github.workspace }}/tests/correct_yaml:/linter_workdir/repo
-                    local/yaml-linter-pr:latest"
-
-            - name: "Test incorrectly formatted YAML"
-              run: "docker run --rm -v ${{ github.workspace }}/tests/incorrect_yaml:/linter_workdir/repo
-                    local/yaml-linter-pr:latest && { echo 'Incorrectly formatted YAML test must fail!' >&2; exit 1; }
-                    || exit 0"
-
             - name: "Run local YAML linter"
               run: "docker run --rm -v ${{ github.workspace }}:/linter_workdir/repo local/yaml-linter-pr:latest"
 
