@@ -69,29 +69,16 @@ jobs:
             - name: "Build YAML linter Docker image"
               uses: "docker/build-push-action@v6"
               with:
-                  # NOTE: setup of `context` is needed to force builder to use the `.dockerignore` file.
-                  context: "."
                   push: false
                   load: true
 
                   # NOTE: using another name to don't allow docker to download image from the internet in the next step.
                   tags: "local/yaml-linter-pr:latest"
+                  cache-from: "type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+                  cache-to: "type=inline"
 
-            - name: "Test correctly formatted YAML"
-              run: "docker run --rm -v ${{ github.workspace }}/tests/correct_yaml:/linter_workdir/repo
-                    local/yaml-linter-pr:latest"
-
-            - name: "Test incorrectly formatted YAML"
-              run: "docker run --rm -v ${{ github.workspace }}/tests/incorrect_yaml:/linter_workdir/repo
-                    local/yaml-linter-pr:latest && { echo 'Incorrectly formatted YAML test must fail!' >&2; exit 1; }
-                    || exit 0"
-
-            # HACK: remove `tests` directory before linting repo directory because there is no way to easily ignore folder
-            # from yamllinter CLI.
-            - name: "Lint repo directory"
-              run: |
-                  rm -rf ${{ github.workspace }}/tests
-                  docker run --rm -v ${{ github.workspace }}:/linter_workdir/repo local/yaml-linter-pr:latest
+            - name: "Run local YAML linter"
+              run: "docker run --rm -v ${{ github.workspace }}:/linter_workdir/repo local/yaml-linter-pr:latest"
 
             - name: "Run Trivy vulnerability scanner"
               uses: "aquasecurity/trivy-action@0.28.0"
