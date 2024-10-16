@@ -157,7 +157,10 @@ jobs:
                   username: "${{ github.actor }}"
                   password: "${{ secrets.GITHUB_TOKEN }}"
 
-
+            # HACK: remove `tests` directory before linting repo directory because there is no way to easily ignore folder
+            # from yamllinter CLI.
+            - name: "Remove `tests` directory"
+              run: "rm -rf ${{ github.workspace }}/tests"
 
             - name: "Run YAML linter"
               run: "docker run --rm -v ${{ github.workspace }}:/linter_workdir/repo
