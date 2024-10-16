@@ -86,7 +86,9 @@ jobs:
                     local/yaml-linter-pr:latest && { echo 'Incorrectly formatted YAML test must fail!' >&2; exit 1; }
                     || exit 0"
 
-            - name: "Run local YAML linter"
+            # HACK: remove `tests` directory before linting repo directory because there is no way to easily ignore folder
+            # from yamllinter CLI.
+            - name: "Lint repo directory"
               run: |
                   rm -rf ${{ github.workspace }}/tests
                   docker run --rm -v ${{ github.workspace }}:/linter_workdir/repo local/yaml-linter-pr:latest
