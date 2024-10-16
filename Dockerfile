@@ -16,4 +16,5 @@ USER linteruser
 
 HEALTHCHECK --timeout=1s --retries=1 CMD yamllint --version || exit 1
 
-ENTRYPOINT ["yamllint", "--strict", "."]
+#ENTRYPOINT ["yamllint", "--strict", "."]
+ENTRYPOINT ["tree", "."]
