@@ -74,11 +74,11 @@ jobs:
 
                   # NOTE: using another name to don't allow docker to download image from the internet in the next step.
                   tags: "local/yaml-linter-pr:latest"
-#                  cache-from: "type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
-#                  cache-to: "type=inline"
+                  cache-from: "type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+                  cache-to: "type=inline"
 
             - name: "Test correctly formatted YAML"
-              run: "docker run --no-cache --rm -v ${{ github.workspace }}/tests/correct_yaml:/linter_workdir/repo
+              run: "docker run --rm -v ${{ github.workspace }}/tests/correct_yaml:/linter_workdir/repo
                     local/yaml-linter-pr:latest"
 
             - name: "Test incorrectly formatted YAML"
