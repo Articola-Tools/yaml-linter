@@ -189,7 +189,7 @@ jobs:
     validate-file-paths:
         runs-on: "ubuntu-latest"
         needs: "find-changed-files"
-        if: "${{ needs.find-changed-files.outputs.changed_or_added_files == 'true'"
+        if: "${{ needs.find-changed-files.outputs.changed_or_added_files == 'true' }}"
 
         # NOTE: validating file paths takes around 1 minute.
         # If this job takes more than 5 minutes, it means that something is wrong.
