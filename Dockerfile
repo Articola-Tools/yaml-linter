@@ -1,4 +1,4 @@
-FROM python:3.13.0-alpine
+FROM python:3.13.1-alpine
 
 RUN addgroup -S lintergroup && adduser -S linteruser -G lintergroup
 
